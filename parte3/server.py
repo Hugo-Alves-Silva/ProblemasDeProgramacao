@@ -41,18 +41,22 @@ def on_new_client(client, connection):
             sckBD.close()
         
         dados2 = msg2.decode().split("*")
-        salarioAux = dados2[1].split(".")
-        salario = int(salarioAux[0])
-        if len(salarioAux) > 1:
-            salario += (int(salarioAux[1]) / 100)
+        if len(dados2) == 1:
+            reply = dados2[0]
+        else:
+            salarioAux = dados2[1].split(".")
+            salario = int(salarioAux[0])
+            if len(salarioAux) > 1:
+                salario += (int(salarioAux[1]) / 100)
         
         
-        if dados2[0].lower() == 'operador' or dados2[0].lower() == 'operadora':
-            salario += (salario * (20/100))
-        elif dados2[0].lower() == 'programador' or dados2[0].lower() == 'programadora':
-            salario += (salario* (18/100))
+            if dados2[0].lower() == 'operador' or dados2[0].lower() == 'operadora':
+                salario += (salario * (20/100))
+            elif dados2[0].lower() == 'programador' or dados2[0].lower() == 'programadora':
+                salario += (salario* (18/100))
   
-        reply = f"{dados} com salário de: {salario}"
+            reply = f"{dados} com salário de: {salario}"
+        
         client.sendall(reply.encode('utf-8'))
         
     print(f"O cliente do ip: {ip}, e da porta: {port}, foi desconectado!")

@@ -33,8 +33,11 @@ def on_new_client(client, connection):
     print(f"A nova conexão foi feita do IP: {ip}, e da porta: {port}!")
     msg = client.recv(1024)
     dados = msg.decode()
-    informacoes = pessoas[dados] 
-    reply = informacoes[0] + "*" + str(informacoes[1])
+    informacoes = pessoas.get(dados) 
+    if(informacoes == None):
+        reply = 'Pessoa não encontrada no banco de dados'
+    else:
+        reply = informacoes[0] + "*" + str(informacoes[1])
     client.sendall(reply.encode('utf-8'))
     print(f"O cliente do ip: {ip}, e da porta: {port}, foi desconectado!")
     client.close()
