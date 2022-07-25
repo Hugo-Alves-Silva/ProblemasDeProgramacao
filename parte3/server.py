@@ -5,6 +5,8 @@ import threading
 parser = argparse.ArgumentParser(description = "Servidor multithreading")
 parser.add_argument('--host', metavar = 'host', type = str, nargs = '?', default = "127.0.0.1")
 parser.add_argument('--port', metavar = 'port', type = int, nargs = '?', default = 9999)
+parser.add_argument('--hostBD', metavar = 'hostBD', type = str, nargs = '?', default = "127.0.0.1")
+parser.add_argument('--portBD', metavar = 'portBD', type = int, nargs = '?', default = 9998)
 args = parser.parse_args()
 
 print(f"Rodando o servidor no host: {args.host} e na porta: {args.port}")
@@ -28,6 +30,16 @@ def on_new_client(client, connection):
         if msg.decode() == 'sair':
             break
         dados = msg.decode()
+        
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sck:
+            try:
+                sck.connect((args.hostBD, args.portBD))
+            except Exception as e:
+                raise SystemExit(f" Falhamos em conectar com o host: {args.hostBD} na porta: {args.portBD}, porque: {e}")
+        
+            sck.sendall(dados.encode('utf-8'))
+            dados = sck.recv(1024)
+            
         
         #reply = f"{dados[0]} com salário de: {salario}"
         #client.sendall(reply.encode('utf-8'))
