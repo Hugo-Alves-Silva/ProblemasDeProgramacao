@@ -66,7 +66,7 @@ int main(int argc, char *argv[]){
         if (bytesReceived == -1)
             cout << "Ocorreu um erro\r\n";
         else
-            cout << "SERVER> " << string(buf, bytesReceived) << "\r\n";
+            cout << "SERVER> \n" << string(buf, bytesReceived) << "\r\n";
         } while(true);
 
     //	Close the socket

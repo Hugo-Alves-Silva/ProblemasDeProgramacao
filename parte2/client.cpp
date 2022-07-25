@@ -53,11 +53,12 @@ int main(int argc, char *argv[]){
             sendRes = send(sock, teste.c_str(), teste.size(), 0);
             break;
         }
+        cin.ignore();
         string nome, cargo, salario;
         cout<<"Digite seu nome: ";
-        cin >> nome;
+        getline(cin, nome);
         cout << "Digite seu cargo: ";
-        cin >> cargo;
+        cin>> cargo;
         cout<< "Digite seu salário: ";
         cin >> salario;
         string msg;
@@ -69,7 +70,7 @@ int main(int argc, char *argv[]){
         if (bytesReceived == -1)
             cout << "Ocorreu um erro\r\n";
         else
-            cout << "SERVER> " << string(buf, bytesReceived) << "\r\n";
+            cout << "SERVER> \n" << string(buf, bytesReceived) << "\r\n";
         } while(true);
 
     //	Close the socket

@@ -28,9 +28,9 @@ def on_new_client(client, connection):
         if msg.decode() == 'sair':
             break
         dados = msg.decode().split("*")
-        n1Aux = dados[0].split(",")
-        n2Aux = dados[1].split(",")
-        n3Aux = dados[2].split(",")
+        n1Aux = dados[0].split(".")
+        n2Aux = dados[1].split(".")
+        n3Aux = dados[2].split(".")
         
         n1 = float(n1Aux[0])
         n2 = float(n2Aux[0])

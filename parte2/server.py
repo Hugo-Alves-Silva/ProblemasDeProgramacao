@@ -28,7 +28,7 @@ def on_new_client(client, connection):
         if msg.decode() == 'sair':
             break
         dados = msg.decode().split("*")
-        salarioAux = dados[2].split(",")
+        salarioAux = dados[2].split(".")
         salario = int(salarioAux[0])
         if len(salarioAux) > 1:
             salario += (int(salarioAux[1]) / 100)

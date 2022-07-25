@@ -29,7 +29,7 @@ def on_new_client(client, connection):
             break
         dados = msg.decode().split("*")
         
-        alturaAux = dados[0].split(",")
+        alturaAux = dados[0].split(".")
         altura = float(alturaAux[0])
         if len(alturaAux) > 1:
             altura += float(alturaAux[1])/100;

@@ -33,13 +33,13 @@ def on_new_client(client, connection):
               saldoMedio += float(dados[1])/100.0
         reply = ""
         if saldoMedio >= 0 and saldoMedio<= 200:
-            reply = f"O saldo médio: {saldoMedio} e nenhum crédito"
+            reply = f"Saldo médio: {saldoMedio}\nNenhum crédito"
         elif saldoMedio >= 201 and saldoMedio <= 400:
-            reply = f"O saldo médio: {saldoMedio} e o crédito: {(20/100) * saldoMedio:.2f}"
+            reply = f"Saldo médio: {saldoMedio}\nCrédito: {(20/100) * saldoMedio:.2f}"
         elif saldoMedio >= 401 and saldoMedio<= 600:
-            reply = f"O saldo médio: {saldoMedio} e o crédito: {(20/100) * saldoMedio:.2f}"
+            reply = f"Saldo médio: {saldoMedio}\nCrédito: {(20/100) * saldoMedio:.2f}"
         elif  saldoMedio >= 601: 
-            reply = f"O saldo médio: {saldoMedio} e o crédito: {(20/100) * saldoMedio:.2f}"
+            reply = f"Saldo médio: {saldoMedio}\nCrédito: {(20/100) * saldoMedio:.2f}"
         
        
         client.sendall(reply.encode('utf-8'))

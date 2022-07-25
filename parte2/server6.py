@@ -32,10 +32,10 @@ def on_new_client(client, connection):
         nivel = dados[1]
         numeroDeDependentes = int(dados[3])  
         
-        salarioAux = dados[2].split(",")
+        salarioAux = dados[2].split(".")
         salario = float(salarioAux[0])
         if len(salarioAux) > 1:
-            salario += float(salarioAux)/100.0
+            salario += float(salarioAux[1])/100.0
         
         salarioLiquido = 0.0
         
@@ -61,7 +61,7 @@ def on_new_client(client, connection):
                 salarioLiquido = salario - (salario * (17.0/100.0))
          
         
-        reply = f"Nome: {nome}, nível: {nivel} e salário liquido: {salarioLiquido}"
+        reply = f"Nome: {nome}\nNível: {nivel}\nSalário líquido: {salarioLiquido: .2f}"
         client.sendall(reply.encode('utf-8'))
 
     print(f"O cliente do ip: {ip}, e da porta: {port}, foi desconectado!")

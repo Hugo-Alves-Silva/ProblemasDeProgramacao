@@ -54,7 +54,7 @@ int main(int argc, char *argv[]){
             break;
         }
         string n1, n2, n3;
-        cout << "Digite n1:  ";
+        cout << "Digite n1: ";
         cin >> n1;
         cout << "Digite n2: ";
         cin >> n2;
@@ -70,7 +70,7 @@ int main(int argc, char *argv[]){
         if (bytesReceived == -1)
             cout << "Ocorreu um error\r\n";
         else
-            cout << "SERVER> " << string(buf, bytesReceived) << "\r\n";
+            cout << "SERVER> \n" << string(buf, bytesReceived) << "\r\n";
         } while(true);
 
     //	Close the socket
