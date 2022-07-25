@@ -38,8 +38,10 @@ def on_new_client(client, connection):
                 raise SystemExit(f" Falhamos em conectar com o host: {args.hostBD} na porta: {args.portBD}, porque: {e}")
         
             sck.sendall(dados.encode('utf-8'))
-            dados = sck.recv(1024)
+            msg2 = sck.recv(1024)
             
+        dados = msg2.decode().split("*")
+        #Cálculo
         
         #reply = f"{dados[0]} com salário de: {salario}"
         #client.sendall(reply.encode('utf-8'))

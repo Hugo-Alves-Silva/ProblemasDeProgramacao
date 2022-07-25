@@ -23,15 +23,10 @@ def on_new_client(client, connection):
     ip = connection[0]
     port = connection[1]
     print(f"A nova conexão foi feita do IP: {ip}, e da porta: {port}!")
-    while True:
-        msg = client.recv(1024)
-        if msg.decode() == 'sair':
-            break
-        dados = msg.decode()
-        
-        #reply = f"{dados[0]} com salário de: {salario}"
-        #client.sendall(reply.encode('utf-8'))
-
+    msg = client.recv(1024)
+    dados = msg.decode()
+    #reply = f"{dados[0]} com salário de: {salario}"
+    #client.sendall(reply.encode('utf-8'))
     print(f"O cliente do ip: {ip}, e da porta: {port}, foi desconectado!")
     client.close()
 
