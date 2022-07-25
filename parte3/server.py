@@ -30,22 +30,31 @@ def on_new_client(client, connection):
         if msg.decode() == 'sair':
             break
         dados = msg.decode()
-        
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sck:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sckBD:
             try:
-                sck.connect((args.hostBD, args.portBD))
+                sckBD.connect((args.hostBD, args.portBD))
             except Exception as e:
                 raise SystemExit(f" Falhamos em conectar com o host: {args.hostBD} na porta: {args.portBD}, porque: {e}")
         
-            sck.sendall(dados.encode('utf-8'))
-            msg2 = sck.recv(1024)
-            
-        dados = msg2.decode().split("*")
-        #Cálculo
+            sckBD.sendall(dados.encode('utf-8'))
+            msg2 = sckBD.recv(1024)
+            sckBD.close()
         
-        #reply = f"{dados[0]} com salário de: {salario}"
-        #client.sendall(reply.encode('utf-8'))
-
+        dados2 = msg2.decode().split("*")
+        salarioAux = dados2[1].split(".")
+        salario = int(salarioAux[0])
+        if len(salarioAux) > 1:
+            salario += (int(salarioAux[1]) / 100)
+        
+        
+        if dados2[0].lower() == 'operador' or dados2[0].lower() == 'operadora':
+            salario += (salario * (20/100))
+        elif dados2[0].lower() == 'programador' or dados2[0].lower() == 'programadora':
+            salario += (salario* (18/100))
+  
+        reply = f"{dados} com salário de: {salario}"
+        client.sendall(reply.encode('utf-8'))
+        
     print(f"O cliente do ip: {ip}, e da porta: {port}, foi desconectado!")
     client.close()
 

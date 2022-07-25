@@ -4,8 +4,16 @@ import threading
 
 parser = argparse.ArgumentParser(description = "Servidor multithreading")
 parser.add_argument('--host', metavar = 'host', type = str, nargs = '?', default = "127.0.0.1")
-parser.add_argument('--port', metavar = 'port', type = int, nargs = '?', default = 9999)
+parser.add_argument('--port', metavar = 'port', type = int, nargs = '?', default = 9998)
 args = parser.parse_args()
+
+pessoas = {
+    'João da Silva': ['operador', 2000.0], 
+    'Mario da Costa': ['programador', 3000.0],
+    'Pedro Silva Rodrigues': ['programador', 5500.50],
+    'Maria de Souza': ['médica', 10000.0],
+    'Ana Paula Faria': ['operadora', 3500.0]
+}
 
 print(f"Rodando o servidor no host: {args.host} e na porta: {args.port}")
 print(f"Digite Ctrl + c para sair")
@@ -25,8 +33,9 @@ def on_new_client(client, connection):
     print(f"A nova conexão foi feita do IP: {ip}, e da porta: {port}!")
     msg = client.recv(1024)
     dados = msg.decode()
-    #reply = f"{dados[0]} com salário de: {salario}"
-    #client.sendall(reply.encode('utf-8'))
+    informacoes = pessoas[dados] 
+    reply = informacoes[0] + "*" + str(informacoes[1])
+    client.sendall(reply.encode('utf-8'))
     print(f"O cliente do ip: {ip}, e da porta: {port}, foi desconectado!")
     client.close()
 

@@ -29,3 +29,5 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sck:
 
         data = sck.recv(1024)
         print(f"O servidor respondeu: {data.decode()}")
+    
+    sck.close()
