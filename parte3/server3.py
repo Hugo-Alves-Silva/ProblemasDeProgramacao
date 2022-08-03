@@ -41,16 +41,26 @@ def on_new_client(client, connection):
             sckBD.close()
         
         dados2 = msg2.decode().split("*")
+        
         if len(dados2) == 1:
             reply = dados2[0]
         else:
-            salario = float(dados2[1])
-            if dados2[0].lower() == 'operador' or dados2[0].lower() == 'operadora':
-                salario += (salario * (20/100))
-            elif dados2[0].lower() == 'programador' or dados2[0].lower() == 'programadora':
-                salario += (salario* (18/100))
-  
-            reply = f"{dados} com salário de: {salario}"
+            n1 = float(dados2[0]) 
+            n2 = float(dados2[1])
+            n3 = float(dados2[2])
+            flag = False 
+            m = (n1+n2)/2
+            
+            if m >= 7:
+                flag = True
+            elif m < 7 and m >= 3:
+               if (m + n3)/2 >= 5:
+                   flag = True 
+                
+            if flag:
+                reply =  f"{dados} está aprovado" 
+            else:
+                 reply =  f"{dados} está reprovado"
         
         client.sendall(reply.encode('utf-8'))
         

@@ -58,7 +58,7 @@ int main(int argc, char *argv[]){
         //cin.ignore(100,'\n');
         cin.ignore();
 
-        string nome, cargo, salario;
+        string nome;
         cout<<"Digite seu nome: ";
         getline(cin, nome);
         

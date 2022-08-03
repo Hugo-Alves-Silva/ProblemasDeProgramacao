@@ -41,16 +41,21 @@ def on_new_client(client, connection):
             sckBD.close()
         
         dados2 = msg2.decode().split("*")
+        
         if len(dados2) == 1:
             reply = dados2[0]
         else:
-            salario = float(dados2[1])
-            if dados2[0].lower() == 'operador' or dados2[0].lower() == 'operadora':
-                salario += (salario * (20/100))
-            elif dados2[0].lower() == 'programador' or dados2[0].lower() == 'programadora':
-                salario += (salario* (18/100))
-  
-            reply = f"{dados} com salário de: {salario}"
+            sexo = dados2[0] 
+            idade = int(dados2[1])
+            flag = False 
+            if sexo == 'masculino' and idade >= 18:
+                flag = True
+            elif sexo == 'feminino' and idade >=21:
+                flag = True
+            if flag: 
+                reply = f"{dados} já é maior de idade"
+            else:
+                reply =  f"{dados} ainda não é maior de idade" 
         
         client.sendall(reply.encode('utf-8'))
         
