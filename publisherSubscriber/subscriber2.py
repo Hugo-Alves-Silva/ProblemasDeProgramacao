@@ -11,15 +11,17 @@ s.setsockopt_string(zmq.SUBSCRIBE, 'MAIORIDADE') # subscribe to TIME messages
 while True: # Five iterations
     info = s.recv() # receive a message
     dados = info.decode().split('*')  
-    maior = False
-    idade = int(dados[3])
-    if dados[2].lower() == 'masculino':
-        if  
-    elif dados[2].lower() == 'feminino':
-        salario += salario * (18.0/100.0) 
-       
-    if()
-    print(f"Nome: {dados[1]}")
     
-    print(f"Salário: {salario:.2f}")
-    print("")
+    maior = False
+    nome = dados[1]
+    idade = int(dados[3])
+    sexo  = dados[2].lower() 
+    if sexo == 'masculino' and idade >= 18:
+        print(f"{nome} é maior de idade.")    
+    elif sexo == 'masculino' and idade < 18:
+        print(f"{nome} não é maior de idade.")
+    elif sexo == 'feminino' and idade >= 21:
+        print(f"{nome} é maior de idade.")    
+    elif sexo == 'feminino' and idade < 21: 
+        print(f"{nome} não é maior de idade.")
+    
