@@ -30,7 +30,7 @@ public class MaioridadeImpl extends UnicastRemoteObject implements Maioridade {
     }
 
     public boolean atingiuMaioridade(){
-        if(this.sexo.toLowerCase().equals("Masculino")){
+        if(this.sexo.toLowerCase().equals("masculino")){
             if(this.idade >= 18) return true;
             else return false;
         }
